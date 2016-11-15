@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.samongi.Inscription.PlacementTracker;
 import net.samongi.Inscription.Inscription;
 import net.samongi.Inscription.Player.PlayerData;
 import net.samongi.SamongiLib.Configuration.ConfigFile;
@@ -44,7 +45,7 @@ public class ExperienceManager
   private Map<MaterialData, Map<String, Integer>> exp_per_place = new HashMap<>();
   private Map<MaterialData, Map<String, Integer>> exp_per_craft = new HashMap<>();
 
-  private BlockTracker tracker;
+  private PlacementTracker tracker;
 
   /**
    * Method that encompasses logic to be handled by the experience manager
@@ -439,7 +440,7 @@ public class ExperienceManager
     }
   } // endef
 
-  public BlockTracker getTracker()
+  public PlacementTracker getTracker()
   {
     return this.tracker;
   }
@@ -465,7 +466,7 @@ public class ExperienceManager
       if (m == null) continue;
       tracked_m.add(m);
     }
-    if (this.tracker == null) this.tracker = new BlockTracker();
+    if (this.tracker == null) this.tracker = new PlacementTracker();
     this.tracker.clearTracked();
     for (Material m : tracked_m)
       this.tracker.addTracked(m);
@@ -473,10 +474,10 @@ public class ExperienceManager
   }
   public void saveTracker(File file)
   {
-    BlockTracker.save(this.tracker, file);
+    PlacementTracker.save(this.tracker, file);
   }
   public void loadTracker(File file)
   {
-    this.tracker = BlockTracker.load(file);
+    this.tracker = PlacementTracker.load(file);
   }
 }
